@@ -9,8 +9,8 @@ const config = {
     	home: './src/home.js',
     },
     output: {
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].js',
+        filename: '[name].[chunkhash:8].js',
+        chunkFilename: '[name].[chunkhash:8].js',
         path: path.resolve('dist')
     },
     module: {
@@ -52,7 +52,7 @@ const config = {
                     priority: 10
                 },
                 commons: { // 抽离自己写的公共代码，utils这个名字可以随意起
-                    chunks: 'initial',
+                    chunks: 'all',
                     minChunks: 2,
                     minSize: 0    // 只要超出0字节就生成一个新包
                 },
@@ -70,7 +70,7 @@ const config = {
             hash: true
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: '[name].[contenthash:8].css',
         })
     ],
     mode: 'development'
