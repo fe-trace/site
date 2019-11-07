@@ -1,4 +1,16 @@
 {
-    "presets": ["@babel/preset-env", "@babel/preset-react"],
-    "plugins": ["@babel/plugin-transform-runtime"]
+    "presets": [
+        "@babel/preset-env", 
+        "@babel/preset-react"
+    ],
+    "plugins": [
+        "@babel/plugin-transform-runtime",
+        ["import", { 
+            "libraryName": "lodash",
+            // 子模块对应文件夹
+            "libraryDirectory": "",
+            // 是否采用驼峰命名
+            "camel2DashComponentName": false
+        }]
+    ]
 }
