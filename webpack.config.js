@@ -3,6 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
+    watch: true,
+    watchOptions: {
+        ignored: /node_modules/
+    },
+    devServer: {
+        port: 9000,
+        compress: true,
+        contentBase: path.join(__dirname, "dist"),
+    },
     devtool: 'cheap-eval-source-map',
     entry: {
     	index: './src/index.js',
@@ -48,21 +57,27 @@ const config = {
         },
         splitChunks: {
             cacheGroups: {
-                lib: {   // 抽离第三方插件
-                    test: /node_modules/,   // 指定是node_modules下的第三方包
+                // 抽离第三方插件
+                lib: {
+                    // 指定是node_modules下的第三方包
+                    test: /node_modules/,
                     chunks: 'all',
-                    // minSize: 0,
+                    minSize: 0,
                     // 设置优先级，防止和自定义的公共代码提取时被覆盖，不进行打包
                     priority: 10
                 },
-                commons: { // 抽离自己写的公共代码，utils这个名字可以随意起
+                // 抽离自己写的公共代码
+                commons: {
                     chunks: 'all',
                     minChunks: 2,
-                    minSize: 0    // 只要超出0字节就生成一个新包
+                    // 只要超出0字节就生成一个新包
+                    minSize: 0
                 },
-                runtime: { // 抽离自己写的公共代码，utils这个名字可以随意起
+                // 抽离入口模块，可以不配置这个
+                runtime: {
                     chunks: 'initial',
-                    minSize: 0    // 只要超出0字节就生成一个新包
+                    // 只要超出0字节就生成一个新包
+                    minSize: 0
                 }
             }
         }

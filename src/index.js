@@ -10,3 +10,5 @@ import('./lib.js').then(lib => {
     console.log(lib);
 });
 console.log(isNull, isArray);
+
+console.log(111);
