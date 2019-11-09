@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -8,18 +9,19 @@ const config = {
         ignored: /node_modules/
     },
     devServer: {
+        hotOnly: true,
         port: 9000,
         compress: true,
         contentBase: path.join(__dirname, "dist"),
     },
-    devtool: 'cheap-eval-source-map',
+    devtool: 'cheap-source-map',
     entry: {
     	index: './src/index.js',
-    	home: './src/home.js',
+    	// home: './src/home.js',
     },
     output: {
-        filename: '[name].[chunkhash:8].js',
-        chunkFilename: '[name].[chunkhash:8].js',
+        filename: '[name].js',
+        chunkFilename: '[name].js',
         path: path.resolve('dist')
     },
     module: {
@@ -43,7 +45,7 @@ const config = {
                         loader: 'url-loader',
                         options: {
                             limit: 8192,
-                            name : 'img/[name].[hash].[ext]'
+                            name : 'img/[name].[ext]'
                         }
                     }
                 ]
@@ -89,7 +91,7 @@ const config = {
             hash: true
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash:8].css',
+            filename: '[name].css',
         })
     ],
     mode: 'development'
