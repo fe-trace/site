@@ -4,16 +4,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
-    watch: true,
-    watchOptions: {
-        ignored: /node_modules/
-    },
-    devServer: {
-        hotOnly: true,
-        port: 9000,
-        compress: true,
-        contentBase: path.join(__dirname, "dist"),
-    },
+    // watch: true,
+    // watchOptions: {
+    //     ignored: /node_modules/
+    // },
+    // devServer: {
+    //     hotOnly: true,
+    //     port: 9000,
+    //     compress: true,
+    //     contentBase: path.join(__dirname, "dist"),
+    // },
     devtool: 'cheap-source-map',
     entry: {
     	index: './src/index.js',
@@ -76,11 +76,11 @@ const config = {
                     minSize: 0
                 },
                 // 抽离入口模块，可以不配置这个
-                runtime: {
-                    chunks: 'initial',
-                    // 只要超出0字节就生成一个新包
-                    minSize: 0
-                }
+                // runtime: {
+                //     chunks: 'initial',
+                //     // 只要超出0字节就生成一个新包
+                //     minSize: 0
+                // }
             }
         }
     },
