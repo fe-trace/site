@@ -15,5 +15,3 @@ module.rules 用来配置不同类型资源的解析方式
 ### devtool
 devtool通常在开发过程需要配置，用于控制如何生成source map（source map主要用在调试过程，生成便于调试的代码）。
 ![source map取值方式](./img/source-map.png)
-
-[参考链接](https://www.cnblogs.com/kwzm/p/10314438.html)
