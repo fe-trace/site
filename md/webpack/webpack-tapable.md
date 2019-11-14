@@ -13,7 +13,7 @@ PS：实例化 Hook 需要一个字符串数组作为参数，字符串数组中
 
 ### Hook 函数特性
 类型 | 特点
-- | - 
+:- | - 
 SyncHook | 回调串行执行，return 不能中断回调队列，没有返回值
 SyncBailHook | 回调串行执行，return 能中断回调队列，返回值为return值
 SyncWaterfallHook | 回调串行执行，return不能中断回调队列，前面回调返回值会作为后面回调的入参，最后一个return值为调用结果返回值
@@ -26,7 +26,7 @@ AsyncSeriesWaterfallHook |
 
 ### Hook 函数注册和调用方式
 类型 | 注册方式 | 调用方式
-- | - | -
+:- | - | -
 SyncHook | tap | call
 SyncBailHook | tap | call
 SyncWaterfallHook | tap | call
