@@ -29,7 +29,7 @@ const {
 // });
 // hook.tap('sync', function(name) {
 // 	console.log(`2-${name}`);
-// 	// return 2;
+// 	return 2;
 // });
 // hook.tap('sync', function(name) {
 // 	console.log(`3-${name}`);
@@ -37,34 +37,30 @@ const {
 // const data = hook.call('tom');
 // console.log("data: ", data);
 
-// const hook = new SyncWaterfallHook(['name', 'age']);
-// hook.tap('sync', function(name, age) {
-// 	console.log(`1-${name}`, age);
-// 	return [1,2];
+// const hook = new SyncWaterfallHook(['name']);
+// hook.tap('sync', function(name) {
+// 	console.log(`1-${name}`);
+// 	return 1;
 // });
-// hook.tap('sync', function(name, age) {
-// 	console.log(`2-${name}`, age);
-// 	// return 2;
+// hook.tap('sync', function(name) {
+// 	console.log(`2-${name}`);
+// 	return 2;
 // });
-// hook.tap('sync', function(name, age) {
-// 	console.log(`3-${name}`, age);
-// 	// return 3;
+// hook.tap('sync', function(name) {
+// 	console.log(`3-${name}`);
 // });
-// const data = hook.call('tom', '11');
+// const data = hook.call('tom');
 // console.log("data: ", data);
 
 // const hook = new SyncLoopHook(['name']);
 // hook.tap('sync', function(name) {
 // 	console.log(`1-${name}`);
-// 	// return 1;
 // });
 // hook.tap('sync', function(name) {
 // 	console.log(`2-${name}`);
-// 	return undefined;
 // });
 // hook.tap('sync', function(name) {
 // 	console.log(`3-${name}`);
-// 	// return false;
 // });
 // const data = hook.call('tom');
 // console.log("data: ", data);
@@ -103,15 +99,14 @@ const {
 // asyncHook.promise(3).then(d => {
 // 	console.log("data: ", d);
 // });
-
-const asyncHook = new AsyncSeriesWaterfallHook(['name']);
-console.time("time");
-asyncHook.tapAsync('event-1', function(name, callback) {
-	console.log("payload 1 ", name);
-	setTimeout(function() {
-		callback(4);
-	}, 1000)
-});
+// const asyncHook = new AsyncSeriesWaterfallHook(['name']);
+// console.time("time");
+// asyncHook.tapAsync('event-1', function(name, callback) {
+// 	console.log("payload 1 ", name);
+// 	setTimeout(function() {
+// 		callback(4);
+// 	}, 1000)
+// });
 // asyncHook.tap('event-2', function(name, callback) {
 //     console.log("payload 2 ", name);
 // 	// return 2;
@@ -124,40 +119,52 @@ asyncHook.tapAsync('event-1', function(name, callback) {
 //     console.log("payload 4 ", name);
 // 	return Promise.resolve(4);
 // });
-asyncHook.tapAsync('event-2', function(name, callback) {
-	console.log("payload 5 ", name);
-	setTimeout(function() {
-		callback(5);
-	}, 3000)
-});
-asyncHook.callAsync(3, function(data) {
-	console.log('call: ', data);
-	console.timeEnd("time");
-});
+// asyncHook.tapAsync('event-2', function(name, callback) {
+// 	console.log("payload 5 ", name);
+// 	setTimeout(function() {
+// 		callback(5);
+// 	}, 3000)
+// });
+// asyncHook.callAsync(3, function(data) {
+// 	console.log('call: ', data);
+// 	console.timeEnd("time");
+// });
 
-// const asyncHook = new AsyncParallelBailHook(['name']);
-// asyncHook.tapAsync('event-1', function(name, callback) {
+const asyncHook = new AsyncSeriesWaterfallHook(['name']);
+console.time('time');
+
+// asyncHook.tapAsync('async-1', function(name, callback) {
 // 	console.log("payload 1 ", name);
 // 	setTimeout(function() {
 // 		callback(1);
 // 	}, 2000)
 // });
-// asyncHook.tap('event-2', function(name, callback) {
-//     console.log("payload 2 ", name);
-// 	return 2;
-// });
-// asyncHook.tapPromise('event-2', function(name, callback) {
-//     console.log("payload 3 ", name);
-// 	return Promise.resolve(3);
-// });
-// asyncHook.tapPromise('event-3', function(name, callback) {
-//     console.log("payload 4 ", name);
-// 	return Promise.resolve(4);
-// });
-// asyncHook.tapAsync('event-1', function(name, callback) {
-// 	console.log("payload 5 ", name);
+// asyncHook.tapAsync('async-2', function(name, callback) {
+// 	console.log("payload 2 ", name);
 // 	callback(5);
 // });
 // asyncHook.callAsync(2, function(data) {
 // 	console.log('call: ', data);
+// 	console.timeEnd('time');
 // });
+
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
