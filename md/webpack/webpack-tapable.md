@@ -1,3 +1,4 @@
+[//]: # (date: 2019-11-14)
 ## tapable
 tapable 是 webpack 打包过程中进行流程控制的核心。tapable 提供了多种类型的 hook，能够满足同步，异步，并行，串行，值传递 等执行场景。
 
@@ -8,9 +9,36 @@ tapable 提供了流程控制的基类：Hook。基类中提供了公共的流�
 ```
 function Hook(String[]: args) { }
 ```
-实例化 Hook 需要一个字符串数组作为参数，字符串数组中字符可以是任意字符，在内部实现中没有具体含义，主要是用来标记回调函数的参数个数以及动态生成回调函数时作为参数名称使用。
+PS：实例化 Hook 需要一个字符串数组作为参数，字符串数组中字符可以是任意字符，在内部实现中没有具体含义，主要是用来标记回调函数的参数个数以及动态生成回调函数时作为参数名称使用。
 
-### Hook 使用（以SyncHook为例）
+### Hook 函数特性
+类型 | 特点
+- | - 
+SyncHook | 回调串行执行，return 不能中断回调队列，没有返回值
+SyncBailHook | 回调串行执行，return 能中断回调队列，返回值为return值
+SyncWaterfallHook | 回调串行执行，return不能中断回调队列，前面回调返回值会作为后面回调的入参，最后一个return值为调用结果返回值
+SyncLoopHook | 回调串行执行，return返回值不为 undefined 时会重复执行回调（重复执行第一个到当前回调），没有返回值
+AsyncParallelHook | 异步并行执行，只有 tapAsync 有返回值，返回值为最先调用 callback 传递的值 
+AsyncParallelBailHook |
+AsyncSeriesHook | 
+AsyncSeriesBailHook | 
+AsyncSeriesWaterfallHook |
+
+### Hook 函数注册和调用方式
+类型 | 注册方式 | 调用方式
+- | - | -
+SyncHook | tap | call
+SyncBailHook | tap | call
+SyncWaterfallHook | tap | call
+SyncLoopHook | tap | call
+AsyncParallelHook | tap/tapAsync/tapPromise | callAsync/promise 
+AsyncParallelBailHook | tap/tapAsync/tapPromise | callAsync/promise
+AsyncSeriesHook | tap/tapAsync/tapPromise | callAsync/promise
+AsyncSeriesBailHook | tap/tapAsync/tapPromise | callAsync/promise
+AsyncSeriesWaterfallHook | tap/tapAsync/tapPromise | callAsync/promise
+
+### Hook 使用
+SyncHook
 ```
 const { SyncHook } = require('tapable');
 // 实例化 Hook(字符串数组用来标识参数个数)
@@ -25,8 +53,3 @@ hook.tap('event', function(name, age) {
 hook.call('tom', 20);
 ```
 
-name | 价格 |  数量  
--|-|-
-香蕉 | $1 | 5 |
-苹果 | $1 | 6 |
-草莓 | $1 | 7 |
