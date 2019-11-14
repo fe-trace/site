@@ -205,6 +205,7 @@ asyncHook.promise(2).then(function(data) {
 // time: 4010.490ms
 ```
 
+AsyncSeriesBailHook
 ```
 const asyncHook = new AsyncSeriesBailHook(['name']);
 console.time('time');
@@ -233,6 +234,7 @@ asyncHook.promise(2).then(function(data) {
 // time: 1005.311ms
 ```
 
+AsyncSeriesWaterfallHook
 ```
 const asyncHook = new AsyncSeriesWaterfallHook(['name']);
 console.time('time');
