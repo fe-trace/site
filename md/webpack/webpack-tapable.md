@@ -17,7 +17,7 @@ PS：实例化 Hook 需要一个字符串数组作为参数，字符串数组中
 SyncHook | 回调串行执行，return 不能中断回调队列，没有返回值
 SyncBailHook | 回调串行执行，事件处理函数返回值不为 undefined 能中断回调队列，返回值为return值
 SyncWaterfallHook | 回调串行执行，return不能中断回调队列，上一个事件处理函数返回值会作为后面回调的入参，最后一个return值为调用结果返回值
-SyncLoopHook | 回调串行执行，return返回值不为 undefined 时会重复执行回调（重复执行第一个到当前回调），没有返回值
+SyncLoopHook | 回调串行执行，事件处理函数返回值不为 undefined 时会重复执行回调（重复执行第一个到当前回调），没有返回值
 AsyncParallelHook | 异步并行执行
 AsyncParallelBailHook | 异步并行执行，事件处理函数有返回值时不继续往后执行
 AsyncSeriesHook | 异步串行执行
@@ -53,3 +53,211 @@ hook.tap('event', function(name, age) {
 hook.call('tom', 20);
 ```
 
+SyncBailHook
+```
+const hook = new SyncBailHook(['name']);
+hook.tap('sync', function(name) {
+	console.log(`1-${name}`);
+});
+hook.tap('sync', function(name) {
+	console.log(`2-${name}`);
+	return 2;
+});
+hook.tap('sync', function(name) {
+	console.log(`3-${name}`);
+});
+const data = hook.call('tom');
+console.log("data: ", data);
+// 1-tom
+// 2-tom
+// data:  2
+```
+
+SyncWaterfallHook
+```
+const hook = new SyncWaterfallHook(['name']);
+hook.tap('sync', function(name) {
+	console.log(`1-${name}`);
+	return 1;
+});
+hook.tap('sync', function(name) {
+	console.log(`2-${name}`);
+	return 2;
+});
+hook.tap('sync', function(name) {
+	console.log(`3-${name}`);
+});
+const data = hook.call('tom');
+console.log("data: ", data);
+// 1-tom
+// 2-1
+// 3-2
+// data:  2
+```
+
+SyncLoopHook
+```
+const hook = new SyncLoopHook(['name']);
+hook.tap('sync', function(name) {
+	console.log(`1-${name}`);
+});
+hook.tap('sync', function(name) {
+	console.log(`2-${name}`);
+});
+hook.tap('sync', function(name) {
+	console.log(`3-${name}`);
+});
+const data = hook.call('tom');
+console.log("data: ", data);
+// 1-tom
+// 2-tom
+// 3-tom
+// data:  undefined
+```
+
+AsyncParallelHook
+```
+const asyncHook = new AsyncParallelHook(['name']);
+console.time('time');
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
+// promise 1  2
+// promise 2  2
+// call:  undefined
+// time: 3007.090ms
+```
+
+AsyncParallelBailHook
+```
+const asyncHook = new AsyncParallelBailHook(['name']);
+console.time('time');
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
+// promise 1  2
+// promise 2  2
+// call:  1
+// time: 1009.113ms
+```
+
+AsyncSeriesHook
+```
+const asyncHook = new AsyncSeriesHook(['name']);
+console.time('time');
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
+// promise 1  2
+// promise 2  2
+// call:  undefined
+// time: 4010.490ms
+```
+
+```
+const asyncHook = new AsyncSeriesBailHook(['name']);
+console.time('time');
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
+// promise 1  2
+// call:  1
+// time: 1005.311ms
+```
+
+```
+const asyncHook = new AsyncSeriesWaterfallHook(['name']);
+console.time('time');
+asyncHook.tapPromise('promise-1', function(name) {
+    console.log("promise 1 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(1)
+		}, 1000)
+	});
+});
+asyncHook.tapPromise('promise-2', function(name) {
+    console.log("promise 2 ", name);
+	return new Promise(function(resolve) {
+		setTimeout(function() {
+			resolve(2)
+		}, 3000)
+	});
+});
+asyncHook.promise(2).then(function(data) {
+	console.log('call: ', data);
+	console.timeEnd('time');
+});
+// promise 1  2
+// promise 2  1
+// call:  2
+// time: 4015.683ms
+```
