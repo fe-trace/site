@@ -36,7 +36,16 @@ const config = {
             { 
                 test: /\.js$/, 
                 exclude: /node_modules/, 
-                loader: "babel-loader"
+                loader: [
+                    "babel-loader"
+                ]
+            },
+            { 
+                test: /\.md$/, 
+                loader: [
+                    // "babel-loader",
+                    path.resolve(__dirname, './lib/loader/markdown.js')
+                ]
             },
             {
                 test: /\.(jpe?g|png|gif)$/,

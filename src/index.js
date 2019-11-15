@@ -6,9 +6,11 @@
 // console.log(async);
 // console.log("index.js");
 
-import('./lib.js').then(lib => {
-    console.log(lib);
-});
+// import('./lib.js').then(lib => {
+//     console.log(lib);
+// });
 // console.log(isNull, isArray);
 
-console.log(111);
+import md from './../md/test.md';
+
+console.log("md: ", md);

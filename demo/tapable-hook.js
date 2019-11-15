@@ -130,8 +130,8 @@ const {
 // 	console.timeEnd("time");
 // });
 
-const asyncHook = new AsyncSeriesWaterfallHook(['name']);
-console.time('time');
+// const asyncHook = new AsyncSeriesWaterfallHook(['name']);
+// console.time('time');
 
 // asyncHook.tapAsync('async-1', function(name, callback) {
 // 	console.log("payload 1 ", name);
@@ -148,18 +148,44 @@ console.time('time');
 // 	console.timeEnd('time');
 // });
 
+// asyncHook.tapPromise('promise-1', function(name) {
+//     console.log("promise 1 ", name);
+// 	return new Promise(function(resolve) {
+// 		setTimeout(function() {
+// 			resolve(1)
+// 		}, 1000)
+// 	});
+// });
+// asyncHook.tapPromise('promise-2', function(name) {
+//     console.log("promise 2 ", name);
+// 	return new Promise(function(resolve) {
+// 		setTimeout(function() {
+// 			resolve(2)
+// 		}, 3000)
+// 	});
+// });
+// asyncHook.promise(2).then(function(data) {
+// 	console.log('call: ', data);
+// 	console.timeEnd('time');
+// });
+
+
+const asyncHook = new AsyncParallelBailHook(['name']);
+console.time('time');
 asyncHook.tapPromise('promise-1', function(name) {
     console.log("promise 1 ", name);
 	return new Promise(function(resolve) {
 		setTimeout(function() {
-			resolve(1)
-		}, 1000)
+			console.log("1111");
+			resolve()
+		}, 5000)
 	});
 });
 asyncHook.tapPromise('promise-2', function(name) {
     console.log("promise 2 ", name);
 	return new Promise(function(resolve) {
 		setTimeout(function() {
+			console.log("2222");
 			resolve(2)
 		}, 3000)
 	});
