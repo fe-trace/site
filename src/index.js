@@ -11,6 +11,7 @@
 // });
 // console.log(isNull, isArray);
 
-import md from './../md/test.md';
+import md from './../md/webpack/loader.md';
 
+document.body.innerHTML = md;
 console.log("md: ", md);

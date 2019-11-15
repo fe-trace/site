@@ -1,7 +1,7 @@
-## loader
+﻿## loader概述
 loader 在 webpack 中用来自定义资源的编译方式，其本质上就是一个函数，接收资源文件内容，然后将处理结果返回。
 
-### loader 定义
+### 定义
 ```
 module.exports = function(content) {
     return content;
@@ -22,7 +22,7 @@ module.exports.pitch = function(remainingRequest, precedingRequest, data) {
 }
 ```
 
-### loader 执行过程
+### 执行过程
 通过 loader 字段可以为每种资源文件配置多个编译方式，资源文件内容依次从后向前传入每个 loader 进行处理。如果 loader 声明了 pitch 处理逻辑，在执行 loader 逻辑之前，会先从前往后执行 pitch 逻辑。如果 pitch 逻辑中给出了一个执行结果（return xxx），那么会跳过后面的 loader。
 ```
 loader 都配置了 pitch 逻辑
@@ -34,7 +34,7 @@ config: [loaderA, loaderB, loaderC]
 execute: loaderA.pitch -> loaderB.pitch -> loaderA
 ```
 
-### loader 自定义实现
+### 自定义实现
 借助 showdown 实现一个将 markdown 转换为 HTML 的自定义 loader。
 ```
 const showdown = require('showdown');
