@@ -22,7 +22,7 @@ const config = {
         filename: '[name].js',
         chunkFilename: '[name].js',
         path: path.resolve('dist'),
-        // publicPath: "./",
+        publicPath: "./",
     },
     externals: {
         react: 'React',
