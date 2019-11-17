@@ -1,17 +1,28 @@
-// import './css/common.css';
-// import './css/one.css';
-// import * as async from './async.js';
-// import { isArray, isNull } from 'lodash';
+import React from 'react';
+import { render } from 'react-dom';
+import {
+    MemoryRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom"; 
+import './css/reset.css';
+import Home from './comp/home';
 
-// console.log(async);
-// console.log("index.js");
+function Layout(props) {
+    return (
+        <div>
+            <div className="header"></div>
+            <div className="content">
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/detail/:id" component={Home} />
+                    </Switch>
+                </Router>
+            </div>
+        </div>
+    );
+}
 
-// import('./lib.js').then(lib => {
-//     console.log(lib);
-// });
-// console.log(isNull, isArray);
-
-import md from './../md/webpack/loader.md';
-
-document.body.innerHTML = md;
-console.log("md: ", md);
+render(<Layout />, document.body);

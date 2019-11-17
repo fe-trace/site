@@ -4,6 +4,5 @@ npm-debug.log
 .DS_Store
 .svn
 .vscode
-dist
 i18n-locales
 package-lock.json

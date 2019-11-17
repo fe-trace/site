@@ -5,24 +5,30 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
     // watch: true,
-    // watchOptions: {
-    //     ignored: /node_modules/
-    // },
-    // devServer: {
-    //     hotOnly: true,
-    //     port: 9000,
-    //     compress: true,
-    //     contentBase: path.join(__dirname, "dist"),
-    // },
+    watchOptions: {
+        ignored: /node_modules/
+    },
+    devServer: {
+        hotOnly: true,
+        port: 9000,
+        compress: true,
+        contentBase: path.join(__dirname, "dist"),
+    },
     devtool: 'cheap-source-map',
     entry: {
     	index: './src/index.js',
-    	// home: './src/home.js',
     },
     output: {
         filename: '[name].js',
         chunkFilename: '[name].js',
-        path: path.resolve('dist')
+        path: path.resolve('dist'),
+        publicPath: "./",
+    },
+    externals: {
+        react: 'React',
+        'react-dom': 'ReactDOM',
+        'react-router': 'ReactRouter',
+        'react-router-dom': 'ReactRouterDOM'
     },
     module: {
         rules: [
@@ -31,6 +37,13 @@ const config = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader'
+                ]
+            },{
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader', 
+                    'less-loader'
                 ]
             },
             { 
