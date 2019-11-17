@@ -1,0 +1,15 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+
+/***/ "./md/webpack/webpack配置.md":
+/*!*********************************!*\
+  !*** ./md/webpack/webpack配置.md ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"<h2 id=\\\"webpack\\\">webpack 配置</h2>\\n<h3 id=\\\"\\\">概念</h3>\\n<ul>\\n<li>module：ES和CommonJS规范中一个文件就是一个模块</li>\\n<li>chunk：chunk在webpack中是通过module经过一系列的拆分和合并而来。chunk和module可能存在一对一和一对多的关系。一般情况下来源有：<ul>\\n<li>配置的入口模块</li>\\n<li>懒加载模块</li>\\n<li>动态引用模块</li>\\n<li>根据模块拆分规则生成和合并的模块</li></ul></li>\\n<li>bundle：module编译之后的代码，一般和chunk一一对应，chunk进行编译打包压缩之后生成bundle。</li>\\n</ul>\\n<h3 id=\\\"modulerules\\\">module.rules</h3>\\n<p>module.rules 用来配置不同类型资源的解析方式</p>\\n<h3 id=\\\"devtool\\\">devtool</h3>\\n<p>devtool通常在开发过程需要配置，用于控制如何生成source map（source map主要用在调试过程，生成便于调试的代码）。</p>\\n<p><img src=\\\"./img/source-map.png\\\" alt=\\\"source map取值方式\\\" /></p>\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9tZC93ZWJwYWNrL3dlYnBhY2vphY3nva4ubWQuanMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9tZC93ZWJwYWNrL3dlYnBhY2vphY3nva4ubWQ/NDliYSJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZGVmYXVsdCBcIjxoMiBpZD1cXFwid2VicGFja1xcXCI+d2VicGFjayDphY3nva48L2gyPlxcbjxoMyBpZD1cXFwiXFxcIj7mpoLlv7U8L2gzPlxcbjx1bD5cXG48bGk+bW9kdWxl77yaRVPlkoxDb21tb25KU+inhOiMg+S4reS4gOS4quaWh+S7tuWwseaYr+S4gOS4quaooeWdlzwvbGk+XFxuPGxpPmNodW5r77yaY2h1bmvlnKh3ZWJwYWNr5Lit5piv6YCa6L+HbW9kdWxl57uP6L+H5LiA57O75YiX55qE5ouG5YiG5ZKM5ZCI5bm26ICM5p2l44CCY2h1bmvlkoxtb2R1bGXlj6/og73lrZjlnKjkuIDlr7nkuIDlkozkuIDlr7nlpJrnmoTlhbPns7vjgILkuIDoiKzmg4XlhrXkuIvmnaXmupDmnInvvJo8dWw+XFxuPGxpPumFjee9rueahOWFpeWPo+aooeWdlzwvbGk+XFxuPGxpPuaHkuWKoOi9veaooeWdlzwvbGk+XFxuPGxpPuWKqOaAgeW8leeUqOaooeWdlzwvbGk+XFxuPGxpPuagueaNruaooeWdl+aLhuWIhuinhOWImeeUn+aIkOWSjOWQiOW5tueahOaooeWdlzwvbGk+PC91bD48L2xpPlxcbjxsaT5idW5kbGXvvJptb2R1bGXnvJbor5HkuYvlkI7nmoTku6PnoIHvvIzkuIDoiKzlkoxjaHVua+S4gOS4gOWvueW6lO+8jGNodW5r6L+b6KGM57yW6K+R5omT5YyF5Y6L57yp5LmL5ZCO55Sf5oiQYnVuZGxl44CCPC9saT5cXG48L3VsPlxcbjxoMyBpZD1cXFwibW9kdWxlcnVsZXNcXFwiPm1vZHVsZS5ydWxlczwvaDM+XFxuPHA+bW9kdWxlLnJ1bGVzIOeUqOadpemFjee9ruS4jeWQjOexu+Wei+i1hOa6kOeahOino+aekOaWueW8jzwvcD5cXG48aDMgaWQ9XFxcImRldnRvb2xcXFwiPmRldnRvb2w8L2gzPlxcbjxwPmRldnRvb2zpgJrluLjlnKjlvIDlj5Hov4fnqIvpnIDopoHphY3nva7vvIznlKjkuo7mjqfliLblpoLkvZXnlJ/miJBzb3VyY2UgbWFw77yIc291cmNlIG1hcOS4u+imgeeUqOWcqOiwg+ivlei/h+eoi++8jOeUn+aIkOS+v+S6juiwg+ivleeahOS7o+egge+8ieOAgjwvcD5cXG48cD48aW1nIHNyYz1cXFwiLi9pbWcvc291cmNlLW1hcC5wbmdcXFwiIGFsdD1cXFwic291cmNlIG1hcOWPluWAvOaWueW8j1xcXCIgLz48L3A+XCI7Il0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./md/webpack/webpack配置.md\n");
+
+/***/ })
+
+}]);

@@ -14,7 +14,7 @@ const config = {
         compress: true,
         contentBase: path.join(__dirname, "dist"),
     },
-    devtool: 'cheap-source-map',
+    devtool: 'cheap-eval-source-map',
     entry: {
     	index: './src/index.js',
     },
@@ -22,7 +22,7 @@ const config = {
         filename: '[name].js',
         chunkFilename: '[name].js',
         path: path.resolve('dist'),
-        publicPath: "./",
+        // publicPath: "./",
     },
     externals: {
         react: 'React',

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom"; 
 import './css/reset.css';
 import Home from './comp/home';
+import Detail from './comp/detail';
 
 function Layout(props) {
     return (
@@ -17,7 +18,7 @@ function Layout(props) {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/detail/:id" component={Home} />
+                        <Route exact path="/:id" component={Detail} />
                     </Switch>
                 </Router>
             </div>

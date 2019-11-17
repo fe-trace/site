@@ -19,7 +19,7 @@ function readFileList(dir, tag, top=true) {
         } else if(/.md$/.test(fileUrl)) {
             fileList.push({
                 tag: tag,
-                name: item.replace(/.md$/, ""),
+                name: item,
                 createTime: stat.birthtimeMs,
                 modifyTime: stat.mtimeMs
             });
