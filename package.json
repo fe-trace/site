@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "cross-env NODE_ENV=development name=111 node ./demo/test.js",
     "dev": "webpack-dev-server",
     "build": "node ./server/index.js && webpack"
   },
@@ -37,6 +38,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
+    "cross-env": "^6.0.3",
     "editor.md": "^1.5.0",
     "json-loader": "^0.5.7",
     "less": "^3.10.3",
