@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=development name=111 node ./demo/test.js",
+    "test": "cross-env NODE_ENV=development node ./demo/test.js",
     "dev": "webpack-dev-server",
     "build": "node ./server/index.js && webpack"
   },
