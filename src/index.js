@@ -1,12 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import {
-    MemoryRouter as Router,
+    HashRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom"; 
-import './css/reset.css';
+import './css/reset.less';
 import Home from './comp/home';
 import Detail from './comp/detail';
 
@@ -18,7 +17,7 @@ function Layout(props) {
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Home} />
-                        <Route exact path="/:id" component={Detail} />
+                        <Route exact path="/:tag/:name" component={Detail} />
                     </Switch>
                 </Router>
             </div>

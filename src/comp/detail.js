@@ -4,17 +4,16 @@ import {
     useParams
 } from "react-router-dom";
 
-export default function detail(props) {
+export default function detail() {
     const payload = useParams();
     const [ html, setHtml ] = React.useState(null);
 
     React.useEffect(function() {
-        import(`./../../md/webpack/${payload.id}`).then((html) => {
+        import(`./../../md/${payload.tag}/${payload.name}`).then((html) => {
             setHtml(html.default);
         })
     });
 
-    console.log(payload);
     return (
         <div className="detail-page">
             <div dangerouslySetInnerHTML={{ __html: html }} />

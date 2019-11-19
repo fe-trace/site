@@ -7,8 +7,8 @@ import json from './../json/home.js';
 export default function home(props) {
     const history = useHistory();
     const list = json.fileList;
-    const handleCick = function(url) {
-        history.push(`/${url}`);
+    const handleCick = function(tag, name) {
+        history.push(`/${tag}/${name}`);
     };
 
     return (
@@ -18,7 +18,7 @@ export default function home(props) {
                     return (
                         <div className="block" key={index}>
                             <div className="title">
-                                <a onClick={() => {handleCick(item.name)}}>{item.name}</a>
+                                <a onClick={() => {handleCick(item.tag, item.name)}}>{item.name}</a>
                             </div>
                             <div className="meta">{moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}</div>
                         </div>
