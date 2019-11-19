@@ -3,8 +3,8 @@ const cp = require('child_process');
 console.log(process.argv);
 const ls = cp.spawn('node', ['./demo/tapable-hook.js'], {
     env: {
-        name: 1,
         age: 2,
+        name: 1,
         addr: 3
     }
 });

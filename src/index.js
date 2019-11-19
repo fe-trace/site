@@ -3,9 +3,8 @@ import { render } from 'react-dom';
 import {
     MemoryRouter as Router,
     Switch,
-    Route,
-    Link
-} from "react-router-dom"; 
+    Route
+} from "react-router-dom";
 import './css/reset.css';
 import Home from './comp/home';
 import Detail from './comp/detail';
