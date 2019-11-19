@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
-    devtool: 'cheap-source-map',
     entry: {
     	index: './src/index.js',
     },

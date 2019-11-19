@@ -7,7 +7,7 @@
     "test": "cross-env NODE_ENV=development node ./demo/test.js",
     "debug": "cross-env DEBUG='1' node ./demo/debug.js",
     "dev": "webpack-dev-server --config=webpack.config.dev.js",
-    "build": "node ./server/index.js && webpack --config=webpack.config.prod.js"
+    "build": "rm -rf ./dist && node ./server/index.js && webpack --config=webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
