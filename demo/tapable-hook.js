@@ -194,3 +194,5 @@ asyncHook.promise(2).then(function(data) {
 	console.log('call: ', data);
 	console.timeEnd('time');
 });
+
+console.log("payload: ", process.env);

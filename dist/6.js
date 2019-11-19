@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{145:function(n,o,s){"use strict";s.r(o),o.default='<h3 id="gitpush">Git push 代码失败</h3>\n<p>添加如下配置到：.ssh/config</p>\n<pre><code>Host github.com\n  Hostname ssh.github.com\n  Port 443\n</code></pre>'}}]);

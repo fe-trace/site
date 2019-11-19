@@ -1,14 +1,1 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
-
-/***/ "./md/webpack/img/source-map.png":
-/*!***************************************!*\
-  !*** ./md/webpack/img/source-map.png ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("module.exports = __webpack_require__.p + \"img/source-map.png\";//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9tZC93ZWJwYWNrL2ltZy9zb3VyY2UtbWFwLnBuZy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21kL3dlYnBhY2svaW1nL3NvdXJjZS1tYXAucG5nPzMzOTUiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSBfX3dlYnBhY2tfcHVibGljX3BhdGhfXyArIFwiaW1nL3NvdXJjZS1tYXAucG5nXCI7Il0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./md/webpack/img/source-map.png\n");
-
-/***/ })
-
-}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{144:function(n,e,o){"use strict";o.r(e),e.default='<h2 id="crossenv">cross-env</h2>\n<p>在使用 webpack 编辑编译静态资源时，需要根据生产环境的不同，设置不同的配置参数。通常我们会设置 NODE_ENV 环境变量来区分不同的环境。cross-env 就时为了这种使用场景诞生的，他能在 process.env 对象上添加自定义的参数从而标识不同的环境。</p>\n<h3 id="">具体实现</h3>\n<p>通过子进程执行具体的命令时可以通过 env 属性设置参数，然后可以通过 process.env 获取</p>\n<pre><code>function crossEnv(args, options = {}) {\n    const [envSetters, command, commandArgs] = parseCommand(args)\n    const env = getEnvVars(envSetters)\n    if (command) {\n    const proc = spawn(\n        commandConvert(command, env, true),\n        commandArgs.map(arg =&gt; commandConvert(arg, env)),\n        {\n            stdio: \'inherit\',\n            shell: options.shell,\n            env,\n        },\n    )\n    return proc\n    }\n    return null\n}\n</code></pre>'}}]);
