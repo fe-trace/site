@@ -12,3 +12,4 @@
 ### nodejs 随笔
 
 1. [nodejs 随笔之cross-env](https://github.com/fe-trace/site/blob/master/md/nodejs/cross-env.md)
+2. [next.js 随笔之源码学习](https://github.com/fe-trace/site/blob/master/md/nodejs/nextJs.md)
