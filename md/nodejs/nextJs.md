@@ -181,11 +181,18 @@ renderToHTML(req, res, pathname, query = {}, {
     } = {}) {
     return this.findPageComponents(pathname, query)
         .then(result => {
-            return this.renderToHTMLWithComponents(req, res, pathname, query, result, Object.assign({}, this.renderOpts, {
-                amphtml,
-                hasAmp,
-                dataOnly
-            }));
+            return this.renderToHTMLWithComponents(
+                req, 
+                res, 
+                pathname, 
+                query, 
+                result, 
+                Object.assign({}, this.renderOpts, {
+                    amphtml,
+                    hasAmp,
+                    dataOnly
+                })
+            );
         }, err => {
 
         }    
@@ -197,3 +204,10 @@ function renderToHTMLWithComponents() {
 }
 // 渲染 React 组件获取最终 HTML (next\dist\next-server\server\render.js) 
 ```
+
+### 总结
+本次阅读nextJs源码只大概的看了下实现流程，具体的很多细节并未探究：
+1.CSS在整个过程中如何处理
+2.开发模式下路由的动态编译
+3.服务的热替换处理
+4.懒加载模块在编译过程的处理
