@@ -9,20 +9,30 @@ next.js 作为 react 服务端渲染的框架，一直对其实现原理比较�
 ```
 // 生成 next 实例
 const app = (0, _next.default)(serverOptions);
-
-// 在实例内部定义拦截规则
-this.router = new router_1.default(this.generateRoutes());
+// 调用http模块创建网络服务
+const srv = _http.default.createServer(app.getRequestHandler())
 ```
 
-调用http模块创建网络服务
+### 加载自定义路由拦截HTTP请求
+源文件：next\dist\server\next-dev-server.js（next-dev-server 继承 next-server）
 ```
-// 所有请求都都在 next 实例中处理，根据路由规则，匹配具体的处理方式
-const srv = _http.default.createServer(app.getRequestHandler());
+// http服务启动后，加载路由规则
+async prepare() {
+    await this.loadCustomRoutes();
+    if (this.customRoutes) {
+        const { redirects, rewrites } = this.customRoutes;
+        if (redirects.length || rewrites.length) {
+            // TODO: don't reach into router instance
+            this.router.routes = this.generateRoutes();
+        }
+    }
+}
 ```
 
 ### 编译静态资源
 源文件：next\dist\server\next-dev-server.js
-服务启动后，调用 next 实例的 prepare 方法来编译静态资源。生成 hot-reloader 实例挂载到 next 实例上，hot-reloader 中封装了 webpack 处理逻辑
+
+服务启动后，调用 next 实例的 prepare 方法开始执行编译。编译过程通过调用 hot-reloader 进行前后端代码的编译和打包。并将 hot-reloader 实例挂载到 next 实例上。
 ```
 async prepare() {
     // 生成 hot-reloader 实例对象，初始化参数和配置
@@ -37,10 +47,11 @@ async prepare() {
 ```
 
 源文件：next\dist\server\hot-reloader.js
-hot-reloader 处理过程中，通过 webpack 配置对静态资源进行编译，最终将结果保存在 hot-reloader 实例上
+
+hot-reloader 处理过程中，通过 webpack 配置对静态资源进行编译，最终将结果保存在 webpack-dev-middleware 实例上
 ```
 async start() {
-    // 清楚之前的编译结果
+    // 清除之前的编译结果
     await this.clean();
     // 获取 webpack 配置文件
     const configs = await this.getWebpackConfig();
@@ -54,8 +65,8 @@ async start() {
     this.stats = (await this.waitUntilValid()).stats[0];
 }
 ```
-prepareBuildTools 中调用 webpack-dev-middleware 公共库逻辑，监听了 webpack 提供的钩子函数。waitUntilValid 中通过 保存的 webpackDevMiddleware 对象获取编译之后的结果。
-调用 waitUntilValid 时，如果编译未完成会先将回调保存在 callbacks 数组中，如果编译已完成（context.webpackStats 有结果）直接返回
+prepareBuildTools 中调用 webpack-dev-middleware 公共库逻辑，webpack-dev-middleware 调用 webpack 编译资源，并监听 webpack 提供的钩子函数，在编译完成后将结果挂载到 context.webpackStats 上。hot-reloader 可以通过调用webpack-dev-middleware 实例返回的 waitUntilValid 方法获取对编译之后的结果：context.webpackStats。
+调用 waitUntilValid 时，如果编译未完成会先将回调保存在 content.callbacks 数组中，编译完成后触发回调将结果返回。
 ```
 context.compiler.hooks.done.tap('WebpackDevMiddleware', done);
 function done(stats) {
@@ -85,6 +96,9 @@ function done(stats) {
 ### 请求处理逻辑
 访问具体页面时，所有请求都会被 handleRequest 拦截，然后根据 URL 匹配具体的路由处理方式
 ```
+// 启动服务时监听 next 实例上的 getRequestHandler 方法
+_http.default.createServer(app.getRequestHandler());
+
 // 具体处理逻辑
 getRequestHandler() {
     return this.handleRequest.bind(this);
@@ -124,6 +138,7 @@ async run(req, res, parsedUrl) {
     }
     await this.render404(req, res, parsedUrl);
 }
+
 // 以页面请求为例，请求会被 catchall render 规则拦截
 routes.push({
     match: router_1.route('/:path*'),
