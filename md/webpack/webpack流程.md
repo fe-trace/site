@@ -263,6 +263,22 @@ compilation {
         xxx: NormalModule{
             ...
         }
-    }]
+    }],
+    模块拆分后生成chunk
+    chunks: [
+        chunk{
+            _modules: Set(NormalModule{
+                ...
+            })
+            name: xxx
+            files: []
+        }
+    ]   
 }
+
+compilation.seal 流程：build过程主要是根据入口生成调用NormalModuleFactory生成模块实例，处理loader逻辑等。现在的模块数据还是未经过编译的源码。模块封装过程将会生成最终的源码。
+处理流程：
+1.根据入口模块和splitOptimization规则生成chunks
+2.遍历chunks调用模板方法生成可运行代码
+3.将结果保存根据名称保存在 compilation.assets 对象上，同时讲文件名称保存在对应的chunk上
 ```
