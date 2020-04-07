@@ -253,6 +253,10 @@ compilation {
                     name: xxx(模块URL)
                     _value: xxx(模块对应的字符串)
                 },
+                // 模块对应的chunk
+                chunksIterable: Set([
+                    
+                ]),
                 loaders: [babel-loader, ...],
             }
             ...
