@@ -8,16 +8,16 @@ function crossEnv(args, options = {}) {
     const [envSetters, command, commandArgs] = parseCommand(args)
     const env = getEnvVars(envSetters)
     if (command) {
-    const proc = spawn(
-        commandConvert(command, env, true),
-        commandArgs.map(arg => commandConvert(arg, env)),
-        {
-            stdio: 'inherit',
-            shell: options.shell,
-            env,
-        },
-    )
-    return proc
+        const proc = spawn(
+            commandConvert(command, env, true),
+            commandArgs.map(arg => commandConvert(arg, env)),
+            {
+                stdio: 'inherit',
+                shell: options.shell,
+                env,
+            },
+        )
+        return proc
     }
     return null
 }

@@ -72,7 +72,10 @@ constructor(compiler, options = {}, _log) {
 
 更新过程
 + this.setupHooks 监听了 compiler 中的 done 事件，代码更新之后会通过 socket 发送更新后的 hash 到前端
-+ 前端收到更新通知后获取更新的代码
++ 前端收到更新模块信息（包括对应的更新模块信息和新的hash）
++ 通过hash加载更新后的模块
++ 加载完成后更新本地对应的模块
++ 通过 module.hot.accept 监听对模块进行重新渲染
 
 ### 总结
 webpack-dev-server 实现的核心是 webpack 提供的钩子函数，他能获取到编译之后的文件信息，再通过 express 和 middleware 拦截请求进行资源的响应。
